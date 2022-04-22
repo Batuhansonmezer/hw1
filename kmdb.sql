@@ -118,6 +118,10 @@ CREATE TABLE movies (
   actor_id INTEGER
 );
 
+ALTER TABLE movies
+ALTER COLUMN movie_title NUMERIC(22,5) NOT NULL
+;
+
 CREATE TABLE actors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     actor_name TEXT,
@@ -133,16 +137,29 @@ CREATE TABLE studios (
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
 
+INSERT INTO movies (
+  movie_title,
+  year_released,
+  mpaa_rating
+)
+
+VALUES ( "Batman Begin", "2005", "PG-13"), ("The Dark Knight ", "2008", "PG-13"), ("The Dark Knight Rises", "2012", "PG-13");
 
 
+-- Batman Begins          2005           PG-13  Warner Bros.
+-- The Dark Knight        2008           PG-13  Warner Bros.
+-- The Dark Knight Rises  2012           PG-13  Warner Bros.
 
 -- Prints a header for the movies output
 .print "Movies"
 .print "======"
 .print ""
 
+
 -- The SQL statement for the movies output
 -- TODO!
+
+
 
 -- Prints a header for the cast output
 .print ""
