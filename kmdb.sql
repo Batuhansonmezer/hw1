@@ -118,13 +118,11 @@ CREATE TABLE movies (
   actor_id INTEGER
 );
 
-ALTER TABLE movies
-ALTER COLUMN movie_title NUMERIC(22,5) NOT NULL
-;
 
 CREATE TABLE actors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     actor_name TEXT,
+    character_name TEXT,
     movie_id INTEGER
 );
 
@@ -145,7 +143,6 @@ INSERT INTO movies (
 
 VALUES ( "Batman Begin", "2005", "PG-13"), ("The Dark Knight ", "2008", "PG-13"), ("The Dark Knight Rises", "2012", "PG-13");
 
-
 -- Batman Begins          2005           PG-13  Warner Bros.
 -- The Dark Knight        2008           PG-13  Warner Bros.
 -- The Dark Knight Rises  2012           PG-13  Warner Bros.
@@ -154,7 +151,6 @@ VALUES ( "Batman Begin", "2005", "PG-13"), ("The Dark Knight ", "2008", "PG-13")
 .print "Movies"
 .print "======"
 .print ""
-
 
 -- The SQL statement for the movies output
 -- TODO!
