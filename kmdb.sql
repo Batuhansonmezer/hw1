@@ -114,21 +114,16 @@ CREATE TABLE movies (
   movie_title TEXT,
   year_released INTEGER,
   mpaa_rating TEXT,
-  studio_id INTEGER,
+  studio INTEGER,
   actor_id INTEGER
 );
 
-
 CREATE TABLE actors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movie_title TEXT,
     actor_name TEXT,
     character_name TEXT,
     movie_id INTEGER
-);
-
-CREATE TABLE studios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    studio_name TEXT
 );
 
 -- Insert data into your database that reflects the sample data shown above
@@ -138,14 +133,24 @@ CREATE TABLE studios (
 INSERT INTO movies (
   movie_title,
   year_released,
-  mpaa_rating
+  mpaa_rating,
+  studio
 )
 
-VALUES ( "Batman Begin", "2005", "PG-13"), ("The Dark Knight ", "2008", "PG-13"), ("The Dark Knight Rises", "2012", "PG-13");
+VALUES ( "Batman Begin", "2005", "PG-13", "Warner Bros."),
+ ("The Dark Knight ", "2008", "PG-13", "Warner Bros."),
+ ("The Dark Knight Rises", "2012", "PG-13", "Warner Bros.")
+;
 
--- Batman Begins          2005           PG-13  Warner Bros.
--- The Dark Knight        2008           PG-13  Warner Bros.
--- The Dark Knight Rises  2012           PG-13  Warner Bros.
+INSERT INTO actors (
+  movie_title,
+  actor_name,
+  character_name,
+  movie_id
+)
+
+VALUES ("Batman Begins", "Christian Bale", "Bruce Wayne", "1"), ("Batman Begins", "Michael Caine", "Alfred", "1"), ("Batman Begins", "Liam Neeson", "Ra's Al Ghul", "1"), ("Batman Begins", "Gary Oldman", "Commissioner Gordon", "1"), ("Batman Begins", "Katie Holmes", "Rachel Dawes", "1"), ("The Dark Knight", "Christian Bale", "Bruce Wayne", "2"), ("The Dark Knight", "Heath Ledger", "Joker", "2"), ("The Dark Knight", "Aaron Eckhart", "Harvey Dent", "2"), ("The Dark Knight", "Michael Caine", "Alfred", "2"), ("The Dark Knight", "Maggie Gyllenhaal", "Rachel Dawes", "2"), ("The Dark Knight Rises", "Christian Bale", "Bruce Wayne", "3"), ("The Dark Knight Rises", "Gary Oldman", "Commissioner Gordon", "3"), ("The Dark Knight Rises", "Tom Hardy", "Bane", "3"), ("The Dark Knight Rises", "Joseph Gordon-Levitt", "John Blake", "3"), ("The Dark Knight Rises", "Anne Hathaway", "Selina Kyle", "3") 
+;
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -155,7 +160,8 @@ VALUES ( "Batman Begin", "2005", "PG-13"), ("The Dark Knight ", "2008", "PG-13")
 -- The SQL statement for the movies output
 -- TODO!
 
-
+SELECT * FROM Movies
+;
 
 -- Prints a header for the cast output
 .print ""
@@ -166,3 +172,13 @@ VALUES ( "Batman Begin", "2005", "PG-13"), ("The Dark Knight ", "2008", "PG-13")
 
 -- The SQL statement for the cast output
 -- TODO!
+
+SELECT * FROM actors
+;
+
+-- Show the years that Michael Caine acted in a movie
+
+SELECT movies.year_released
+FROM actors INNER JOIN movies ON movies.id = actors.movie_id
+WHERE actors.actor_name = "Michael Caine"
+;
